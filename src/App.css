@@ -1,0 +1,336 @@
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.subtitle {
+  margin-top: 0.25rem;
+  opacity: 0.75;
+}
+
+.modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.mode {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  background: #f4f4f4;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.mode.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.results {
+  display: grid;
+  gap: 14px;
+}
+
+.card {
+  border: 1px solid #e3e3e3;
+  border-radius: 14px;
+  padding: 14px 14px 12px;
+  background: #fff;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.pill {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+}
+
+.pill.empty {
+  opacity: 0.9;
+}
+
+.pill.moderate {
+  opacity: 0.9;
+}
+
+.pill.busy {
+  opacity: 0.9;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 12px;
+}
+
+.tag {
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: #fafafa;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.ghost {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+}.report {
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+  margin-top: 8px;
+}
+
+.reportLabel {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.reportButtons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.reportBtn {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.reportBtn.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.hint {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+.distance {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin-top: 6px;
+}
+.confidence {
+  margin: 8px 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.confidenceLine {
+  margin-bottom: 4px;
+}
+/* ---------- Mobile Polish ---------- */
+
+.container {
+  max-width: 480px;
+  padding: 1rem;
+}
+
+.topActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.primary {
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: black;
+  color: white;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.secondaryRow {
+  display: flex;
+  gap: 10px;
+}
+
+.secondaryRow .ghost {
+  flex: 1;
+}
+
+.modes {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding-bottom: 6px;
+}
+
+.mode {
+  min-width: max-content;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+}
+
+.card {
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.cardTop h3 {
+  font-size: 1rem;
+}
+
+.distance {
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.reportButtons {
+  flex-wrap: nowrap;
+}
+
+.actions {
+  flex-direction: column;
+  gap: 8px;
+}
+.status {
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.status.green {
+  color: #1f7a1f;
+}
+
+.status.yellow {
+  color: #b58900;
+}
+
+.status.red {
+  color: #b00020;
+}
+.featuredCard {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #e3e3e3;
+  border-radius: 16px;
+  padding: 10px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.bestOptionLabel {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  margin-bottom: 8px;
+}
+/* ---------- Best Option Card Layout (NEW) ---------- */
+
+.featuredTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.trafficPill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 9px;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+}
+
+.featuredTitleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.featuredTitleBlock h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.floorText {
+  font-size: 0.82rem;
+  opacity: 0.7;
+}
+
+.walkTimeBlock {
+  text-align: right;
+}
+
+.walkTime {
+  font-size: 1.7rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.walkTimeLabel {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.featuredDirectionRow {
+  margin-bottom: 6px;
+}
+
+.directionText {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.featuredMetaRow {
+  margin-bottom: 4px;
+}
+
+.landmarkText {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.featuredWhy {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
