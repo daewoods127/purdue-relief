@@ -7,8 +7,10 @@ export const RESTROOMS = [
     accessible: true,
     genderNeutral: false,
     recentTraffic: "Moderate",
-    lat: 40.4282,
-    lng: -86.9137
+    lat: 40.4275,
+    lng: -86.9132,
+    direction: "North Wing",
+    landmark: "Near main stairwell",
   },
   {
     id: "hicks-2",
@@ -19,7 +21,9 @@ export const RESTROOMS = [
     genderNeutral: true,
     recentTraffic: "Empty",
     lat: 40.4265,
-    lng: -86.9115
+    lng: -86.9115,
+    direction: "North Wing",
+    landmark: "Near main stairwell",
   },
   {
     id: "pmu-1",
@@ -30,7 +34,9 @@ export const RESTROOMS = [
     genderNeutral: false,
     recentTraffic: "Busy",
     lat: 40.4249,
-    lng: -86.9139
+    lng: -86.9139,
+    direction: "North Wing",
+    landmark: "Near main stairwell",
   },
   {
     id: "stewart-1",
@@ -41,7 +47,9 @@ export const RESTROOMS = [
     genderNeutral: false,
     recentTraffic: "Moderate",
     lat: 40.4276,
-    lng: -86.9125
+    lng: -86.9125,
+    direction: "North Wing",
+    landmark: "Near main stairwell",
   },
   {
     id: "krannert-1",
@@ -119,5 +127,93 @@ export const RESTROOMS = [
     recentTraffic: "Empty",
     lat: 40.4293,
     lng: -86.9138
+  },
+  {
+    id: "msee-1",
+    building: "MSEE",
+    floor: "1",
+    singleStall: false,
+    accessible: true,
+    genderNeutral: false,
+    recentTraffic: "Moderate",
+    lat: 40.4289,
+    lng: -86.9149
+  },
+  {
+    id: "forney-1",
+    building: "Forney Hall",
+    floor: "1",
+    singleStall: false,
+    accessible: true,
+    genderNeutral: false,
+    recentTraffic: "Busy",
+    lat: 40.4272,
+    lng: -86.9159
+  },
+  {
+    id: "rawls-1",
+    building: "Rawls Hall",
+    floor: "1",
+    singleStall: true,
+    accessible: true,
+    genderNeutral: true,
+    recentTraffic: "Empty",
+    lat: 40.4230,
+    lng: -86.9204
+  },
+  {
+    id: "physics-1",
+    building: "Physics Building",
+    floor: "1",
+    singleStall: false,
+    accessible: true,
+    genderNeutral: false,
+    recentTraffic: "Moderate",
+    lat: 40.4297,
+    lng: -86.9132
+  },
+  {
+    id: "math-1",
+    building: "Math Building",
+    floor: "1",
+    singleStall: false,
+    accessible: true,
+    genderNeutral: false,
+    recentTraffic: "Busy",
+    lat: 40.4260,
+    lng: -86.9151
+  },
+  {
+    id: "cl50-1",
+    building: "CL50",
+    floor: "1",
+    singleStall: false,
+    accessible: true,
+    genderNeutral: false,
+    recentTraffic: "Moderate",
+    lat: 40.4279,
+    lng: -86.9164
+  },
+  {
+    id: "young-1",
+    building: "Young Hall",
+    floor: "1",
+    singleStall: false,
+    accessible: true,
+    genderNeutral: false,
+    recentTraffic: "Busy",
+    lat: 40.4268,
+    lng: -86.9141
+  },
+  {
+    id: "brown-1",
+    building: "Brown Building",
+    floor: "1",
+    singleStall: true,
+    accessible: true,
+    genderNeutral: true,
+    recentTraffic: "Empty",
+    lat: 40.4280,
+    lng: -86.9156
   }
-];
+]

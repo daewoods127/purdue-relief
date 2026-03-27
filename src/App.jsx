@@ -74,27 +74,26 @@ function milesToMinutes(miles) {
   const minutesPerMile = 17;
   return miles * minutesPerMile;
 }
-function usePurdueLocation() {
-  setUserLocation({
-    lat: 40.4278,
-    lng: -86.9142
-  });
-}
+
 function App() {
   const [mode, setMode] = useState("emergency");
   const [restrooms, setRestrooms] = useState(RESTROOMS);
   const topResultRef = useRef(null);
   const [userLocation, setUserLocation] = useState(null);
   const [showAll, setShowAll] = useState(false);
+
+  function usePurdueLocation() {
+    setUserLocation({
+      lat: 40.4278,
+      lng: -86.9142,
+      isTest: true
+    });
+  }
+
   const ranked = useMemo(() => {
     const items = [...restrooms];
+    
 
-function usePurdueLocation() {
-  setUserLocation({
-    lat: 40.4278,
-    lng: -86.9142
-  });
-}
 
     items.sort((a, b) => {
         if (mode === "emergency" && userLocation) {
@@ -175,8 +174,9 @@ return trafficScore(a.recentTraffic) - trafficScore(b.recentTraffic);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setUserLocation({
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          isTest: false
         });
       },
       () => alert("Location permission denied")
@@ -200,16 +200,43 @@ return trafficScore(a.recentTraffic) - trafficScore(b.recentTraffic);
 </div>
     
       <header className="header">
-        {userLocation && (
-          <div style={{ textAlign: "center", marginBottom: "10px", fontSize: "0.9rem" }}>
-            Testing from: {userLocation.lat.toFixed(4)}, {userLocation.lng.toFixed(4)}
-          </div>
-        )}
-        <h1>Purdue Relief (MVP)</h1>
-        <p className="subtitle">
-          Find the best restroom for your situation — fast and discreet.
-        </p>
-      </header>
+  <h1>Purdue Relief (MVP)</h1>
+  <p className="subtitle">
+    Find the best restroom for your situation — fast and discreet.
+  </p>
+</header>
+
+<div className="topActions">
+  <button
+    className="primary"
+    onClick={() => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          isTest: false
+        });
+      });
+    }}
+  >
+    Use My Location
+  </button>
+
+  <div className="secondaryRow">
+    <button className="ghost" onClick={usePurdueLocation}>
+      Use Purdue Location
+    </button>
+  </div>
+</div>
+
+<div className="locationStatus">
+  Routing from:{" "}
+  {userLocation
+    ? userLocation.isTest
+      ? "Purdue Test Location"
+      : "My Location"
+    : "Not set"}
+</div>
 
       <div className="modes">
         {MODES.map((m) => (
@@ -229,136 +256,182 @@ return trafficScore(a.recentTraffic) - trafficScore(b.recentTraffic);
         </button>
       </div>
       <div className="results">
-        {ranked.slice(0, showAll ? ranked.length : 3).map((r, idx) => (
-          <div
-            key={r.id}
-            className={idx === 0 ? "card featuredCard" : "card"}
-            ref={idx === 0 ? topResultRef : null}
-          >
-            {idx === 0 ? (
-  <>
-    <div className="featuredTop">
-      <span className="bestOptionLabel">Best Option</span>
+       {ranked.slice(0, showAll ? ranked.length : 3).map((r, idx) => {
+  return (
+    <div
+      key={r.id}
+      className={idx === 0 ? "card featuredCard" : "card"}
+      ref={idx === 0 ? topResultRef : null}
+    >
+      {idx === 0 ? (
+        <>
+          <div className="featuredTop">
+            <span className="bestOptionLabel">Best Option</span>
 
-      <span className={`trafficPill ${r.recentTraffic.toLowerCase()}`}>
-        {r.recentTraffic}
-      </span>
-    </div>
+            <span className={`trafficPill ${r.recentTraffic.toLowerCase()}`}>
+              {r.recentTraffic}
+            </span>
+          </div>
 
-    <div className="featuredTitleRow">
-      <div className="featuredTitleBlock">
-        <h2>{r.building}</h2>
-        <div className="floorText">Floor {r.floor}</div>
-      </div>
-
-      <div className="walkTimeBlock">
-        <div className="walkTime">{milesToMinutes(r.distanceMiles)}</div>
-        <div className="walkTimeLabel">min walk</div>
-      </div>
-    </div>
-
-    <div className="featuredDirectionRow">
-      <div className="directionText">{r.direction}</div>
-    </div>
-
-    <div className="featuredMetaRow">
-      <div className="landmarkText">{r.landmark}</div>
-    </div>
-
-    <div className="featuredWhy">Best overall nearby option</div>
-  </>
-) : (
-  <div className="cardTop">
-    <div>
-      <h3>
-        {r.building} • Floor {r.floor}
-      </h3>
-      <div className="locationDetail">
-        {r.direction} • {r.landmark}
-      </div>
-    </div>
-
-    <span className={`pill ${r.recentTraffic.toLowerCase()}`}>
-      {r.recentTraffic}
-    </span>
-  </div>
-)}
-
-  {userLocation && (
-    <div className="distance">
-      ~{milesToMinutes(
-        calculateDistance(
-          userLocation.lat,
-          userLocation.lng,
-          r.lat,
-          r.lng
-        )
-      ).toFixed(1)} min walk
-    </div>
-  )}
-
-            <div className="tags">
-              {r.singleStall && <span className="tag">Single-stall</span>}
-              {r.genderNeutral && <span className="tag">Gender-neutral</span>}
-              {r.accessible && <span className="tag">Accessible</span>}
-              {!r.singleStall && !r.genderNeutral && !r.accessible && (
-                <span className="tag">Standard</span>
-              )}
-            </div>
-           
-            {(() => {
-              const status = getStatus(r, mode, userLocation);
-
-              return (
-                <div className={`status ${status}`}>
-                  {status === "green" && "🟢 Good to go"}
-                  {status === "yellow" && "🟡 Moderate"}
-                  {status === "red" && "🔴 Avoid"}
-                </div>
-              );
-            })()}
-            
-            <div className="report">
-              <div className="reportLabel">Report traffic:</div>
-              <div className="reportButtons">
-                <button
-                  className={
-                    r.recentTraffic === "Empty" ? "reportBtn active" : "reportBtn"
-                  }
-                  onClick={() => reportTraffic(r.id, "Empty")}
-                >
-                  Empty
-                </button>
-                <button
-                  className={
-                    r.recentTraffic === "Moderate"
-                      ? "reportBtn active"
-                      : "reportBtn"
-                  }
-                  onClick={() => reportTraffic(r.id, "Moderate")}
-                >
-                  Moderate
-                </button>
-                <button
-                  className={
-                    r.recentTraffic === "Busy" ? "reportBtn active" : "reportBtn"
-                  }
-                  onClick={() => reportTraffic(r.id, "Busy")}
-                >
-                  Busy
-                </button>
-              </div>
-              <div className="hint">
-                (MVP: local only — backend comes next)
-              </div>
+          <div className="featuredTitleRow">
+            <div className="featuredTitleBlock">
+              <h2>{r.building}</h2>
+              <div className="floorText">Floor {r.floor}</div>
             </div>
 
-            <div className="actions">
-              <button className="ghost">Directions</button>
-              <button className="ghost">Details</button>
+            <div className="walkTimeBlock">
+              <div className="walkTime">{milesToMinutes(r.distanceMiles)}</div>
+              <div className="walkTimeLabel">min walk</div>
             </div>
           </div>
-        ))}
+
+          <div className="featuredDirectionRow">
+            <div className="directionText">{r.direction}</div>
+          </div>
+
+          <div className="featuredMetaRow">
+            <div className="landmarkText">{r.landmark}</div>
+          </div>
+
+          <div className="featuredWhy">Best overall nearby option</div>
+        </>
+      ) : (
+        <div className="cardTop">
+          <div>
+            <h3>
+              {r.building} • Floor {r.floor}
+            </h3>
+            <div className="locationDetail">
+              {r.direction} • {r.landmark}
+            </div>
+          </div>
+
+          <span className={`pill ${r.recentTraffic.toLowerCase()}`}>
+            {r.recentTraffic}
+          </span>
+        </div>
+      )}
+
+      <div className="featuredAction">
+  <button
+    className="primaryActionBtn"
+    onClick={() => {
+      const hasDestinationCoords = r.lat && r.lng;
+      const hasOriginCoords = userLocation?.lat && userLocation?.lng;
+
+      const destination = hasDestinationCoords
+        ? `${r.lat},${r.lng}`
+        : encodeURIComponent(r.building + " Purdue University");
+
+      const origin = hasOriginCoords
+        ? `${userLocation.lat},${userLocation.lng}`
+        : null;
+
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      let url = "";
+
+      if (isIOS) {
+        if (hasDestinationCoords && hasOriginCoords) {
+          url = `http://maps.apple.com/?saddr=${origin}&daddr=${destination}`;
+        } else if (hasDestinationCoords) {
+          url = `http://maps.apple.com/?daddr=${destination}`;
+        } else if (hasOriginCoords) {
+          url = `http://maps.apple.com/?saddr=${origin}&q=${destination}`;
+        } else {
+          url = `http://maps.apple.com/?q=${destination}`;
+        }
+      } else {
+        if (hasDestinationCoords && hasOriginCoords) {
+          url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`;
+        } else if (hasDestinationCoords) {
+          url = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
+        } else {
+          url = `https://www.google.com/maps/search/?api=1&query=${destination}`;
+        }
+      }
+
+      window.open(url, "_blank");
+    }}
+  >
+    Start Walking →
+  </button>
+</div>
+
+      {userLocation && (
+        <div className="distance">
+          ~{milesToMinutes(
+            calculateDistance(
+              userLocation.lat,
+              userLocation.lng,
+              r.lat,
+              r.lng
+            )
+          ).toFixed(1)} min walk
+        </div>
+      )}
+
+      <div className="tags">
+        {r.singleStall && <span className="tag">Single-stall</span>}
+        {r.genderNeutral && <span className="tag">Gender-neutral</span>}
+        {r.accessible && <span className="tag">Accessible</span>}
+        {!r.singleStall && !r.genderNeutral && !r.accessible && (
+          <span className="tag">Standard</span>
+        )}
+      </div>
+
+      {(() => {
+        const status = getStatus(r, mode, userLocation);
+
+        return (
+          <div className={`status ${status}`}>
+            {status === "green" && "🟢 Good to go"}
+            {status === "yellow" && "🟡 Moderate"}
+            {status === "red" && "🔴 Avoid"}
+          </div>
+        );
+      })()}
+
+      <div className="report">
+        <div className="reportLabel">Report traffic:</div>
+        <div className="reportButtons">
+          <button
+            className={
+              r.recentTraffic === "Empty" ? "reportBtn active" : "reportBtn"
+            }
+            onClick={() => reportTraffic(r.id, "Empty")}
+          >
+            Empty
+          </button>
+          <button
+            className={
+              r.recentTraffic === "Moderate"
+                ? "reportBtn active"
+                : "reportBtn"
+            }
+            onClick={() => reportTraffic(r.id, "Moderate")}
+          >
+            Moderate
+          </button>
+          <button
+            className={
+              r.recentTraffic === "Busy" ? "reportBtn active" : "reportBtn"
+            }
+            onClick={() => reportTraffic(r.id, "Busy")}
+          >
+            Busy
+          </button>
+        </div>
+        <div className="hint">(MVP: local only — backend comes next)</div>
+      </div>
+
+      <div className="actions">
+        <button className="ghost">Directions</button>
+        <button className="ghost">Details</button>
+      </div>
+        </div>
+  );
+})}
       </div>
     </div>
   );
