@@ -2,67 +2,166 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+* {
+  box-sizing: border-box;
 }
-a:hover {
-  color: #535bf2;
+
+html,
+body,
+#root {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  background: #f5f7fb;
+  color: #1f2937;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+a {
+  font-weight: 500;
+  text-decoration: none;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* ===== RESULTS LAYOUT ===== */
+
+.visibleResults {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== MODE BANNER ===== */
+
+.modeBanner {
+  margin: 0 0 12px 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.3;
+  background: #1f3b2d;
+  border: 1px solid #7dd3a7;
+  color: #ffffff;
+}
+/* ===== MODE COLORS ===== */
+
+/* ===== MODE COLORS ===== */
+
+.modeBanner.emergency {
+  background-color: #7f1d1d;
+  border-color: #f87171;
+  color: #ffffff;
+}
+
+.modeBanner.privacy {
+  background-color: #5b21b6;
+  border-color: #c4b5fd;
+  color: #ffffff;
+}
+
+.modeBanner.clean {
+  background-color: #166534;
+  border-color: #86efac;
+  color: #ffffff;
+}
+
+.modeBanner.access {
+  background-color: #1d4ed8;
+  border-color: #93c5fd;
+  color: #ffffff;
+}
+
+/* ===== FEATURED CARD ===== */
+
+.featuredCard {
+  padding: 14px;
+}
+
+.featuredMainRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.featuredLeft {
+  flex: 1;
+  min-width: 0;
+}
+
+.featuredBuilding {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.featuredSub {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+
+.featuredWalk {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.walkUnit {
+  font-size: 0.8rem;
+  margin-left: 4px;
+  opacity: 0.7;
+}
+
+.featuredLandmark {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-top: 6px;
+}
+
+.featuredWhy {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.featuredActions {
+  margin-top: 10px;
+}
+
+/* ===== TRAFFIC / PILLS ===== */
+
+.trafficPill {
+  font-size: 0.75rem;
+  padding: 5px 8px;
+}
+
+/* ===== MOBILE TWEAKS ===== */
+
+@media (max-width: 480px) {
+  .featuredWalk {
+    font-size: 1.6rem;
   }
-  a:hover {
-    color: #747bff;
+
+  .featuredBuilding {
+    font-size: 1rem;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .featuredWhy {
+    font-size: 0.9rem;
   }
 }
